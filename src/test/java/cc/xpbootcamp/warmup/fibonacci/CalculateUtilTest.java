@@ -19,4 +19,9 @@ class CalculateUtilTest {
             CalculateUtil.calculate(position);
         });
     }
+
+    @Test
+    void should_return_0_when_calculate_given_position_is_0() {
+        assertEquals(0, CalculateUtil.calculate(0));
+    }
 }

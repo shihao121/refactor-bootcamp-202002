@@ -3,7 +3,10 @@ package cc.xpbootcamp.warmup.fibonacci;
 public class CalculateUtil {
     public static int calculate(int position) {
         validatePosition(position);
-        return 1;
+        if (position == 1) {
+            return 1;
+        }
+        return 0;
     }
 
     private static void validatePosition(int position) {
