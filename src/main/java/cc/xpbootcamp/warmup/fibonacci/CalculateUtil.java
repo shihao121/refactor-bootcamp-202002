@@ -1,12 +1,15 @@
 package cc.xpbootcamp.warmup.fibonacci;
 
 public class CalculateUtil {
-    public static int calculate(int position) {
+    public static long calculate(int position) {
         validatePosition(position);
         if (position == 1) {
-            return 1;
+            return 1L;
         }
-        return 0;
+        if (position == 0){
+            return 0L;
+        }
+        return calculate(position - 1) + calculate(position - 2);
     }
 
     private static void validatePosition(int position) {
