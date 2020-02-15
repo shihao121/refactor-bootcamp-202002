@@ -13,7 +13,7 @@ class CalculateUtilTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = {0, 51, 52})
+    @ValueSource(ints = {-1, 51, 52})
     void should_throw_exception_when_position_is_out_of_border(int position) {
         assertThrows(IllegalArgumentException.class, () -> {
             CalculateUtil.calculate(position);

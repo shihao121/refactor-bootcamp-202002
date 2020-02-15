@@ -7,7 +7,7 @@ public class CalculateUtil {
     }
 
     private static void validatePosition(int position) {
-        if (position > 50 || position <= 0) {
+        if (position > 50 || position < 0) {
             throw new IllegalArgumentException("out of border");
         }
     }
