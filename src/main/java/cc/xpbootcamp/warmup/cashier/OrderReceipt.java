@@ -20,31 +20,42 @@ public class OrderReceipt {
         double totalSalesTax = 0d;
         double totalAmount = 0d;
         for (Good good : order.getGoods()) {
-            output.append(good.getDescription());
-            output.append('\t');
-            output.append(good.getPrice());
-            output.append('\t');
-            output.append(good.getQuantity());
-            output.append('\t');
-            output.append(good.totalAmount());
-            output.append('\n');
-
+            printGoodDetails(output, good);
             double salesTax = good.totalAmount() * .10;
             totalSalesTax += salesTax;
-
             totalAmount += good.totalAmount() + salesTax;
         }
-
         printPrice(output, totalSalesTax, "Sales Tax");
-
         printPrice(output, totalAmount, "Total Amount");
+    }
+
+    private void printGoodDetails(StringBuilder output, Good good) {
+        printContent(output, good.getDescription());
+        printFourTimesSpacebar(output);
+        printContent(output, good.getPrice());
+        printFourTimesSpacebar(output);
+        printContent(output, good.getQuantity());
+        printFourTimesSpacebar(output);
+        printContent(output, good.totalAmount());
+        printInNewLine(output);
+    }
+
+    private void printInNewLine(StringBuilder output) {
+        printSpecifyContent(output, '\n');
+    }
+
+    private void printFourTimesSpacebar(StringBuilder output) {
+        printSpecifyContent(output, '\t');
+    }
+
+    private void printSpecifyContent(StringBuilder output, char escapeSequence) {
+        output.append(escapeSequence);
     }
 
     private void printPrice(StringBuilder output, double price, String priceDescription) {
         printContent(output, priceDescription);
-        printContent(output, '\t');
+        printFourTimesSpacebar(output);
         printContent(output, price);
-        output.append(priceDescription).append('\t').append(priceDescription);
     }
 
     private void printCustomerInfo(StringBuilder output) {
