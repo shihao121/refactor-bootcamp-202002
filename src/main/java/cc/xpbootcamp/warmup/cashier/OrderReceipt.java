@@ -17,15 +17,13 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        // print headers
-        output.append("======Printing Orders======\n");
+        printHeader(output);
+        printCustomerInfo(output);
+        printGoodsDetails(output);
+        return output.toString();
+    }
 
-        // print date, bill no, customer name
-//        output.append("Date - " + order.getDate();
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
-//        output.append(order.getCustomerLoyaltyNumber());
-
+    private void printGoodsDetails(StringBuilder output) {
         // prints lineItems
         double totalSalesTax = 0d;
         double totalAmount = 0d;
@@ -48,10 +46,32 @@ public class OrderReceipt {
         }
 
         // prints the state tax
-        output.append("Sales Tax").append('\t').append(totalSalesTax);
+        printPrice(output, totalSalesTax, "Sales Tax");
 
         // print total amount
-        output.append("Total Amount").append('\t').append(totalAmount);
-        return output.toString();
+        printPrice(output, totalAmount, "Total Amount");
+    }
+
+    private void printPrice(StringBuilder output, double price, String priceDescription) {
+        printContent(output, priceDescription);
+        printContent(output, '\t');
+        printContent(output, price);
+        output.append(priceDescription).append('\t').append(priceDescription);
+    }
+
+    private void printCustomerInfo(StringBuilder output) {
+        // print date, bill no, customer name
+//        output.append("Date - " + order.getDate();
+        printContent(output, order.getCustomerName());
+        printContent(output, order.getCustomerAddress());
+//        output.append(order.getCustomerLoyaltyNumber());
+    }
+
+    private void printHeader(StringBuilder output) {
+        printContent(output, "======Printing Orders======\n");
+    }
+
+    private void printContent(StringBuilder output, Object content) {
+        output.append(content);
     }
 }
