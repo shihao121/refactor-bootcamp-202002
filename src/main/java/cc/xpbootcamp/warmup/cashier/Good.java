@@ -4,12 +4,17 @@ public class Good {
 	private String desc;
 	private double price;
 	private int quantity;
+	private double salesTax;
 
 	public Good(String desc, double price, int quantity) {
 		super();
 		this.desc = desc;
 		this.price = price;
 		this.quantity = quantity;
+	}
+
+	public double getSalesTax() {
+		return totalAmount() * .10;
 	}
 
 	public String getDescription() {

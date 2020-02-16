@@ -21,9 +21,8 @@ public class OrderReceipt {
         double totalAmount = 0d;
         for (Good good : order.getGoods()) {
             printGoodDetails(output, good);
-            double salesTax = good.totalAmount() * .10;
-            totalSalesTax += salesTax;
-            totalAmount += good.totalAmount() + salesTax;
+            totalSalesTax += good.getSalesTax();
+            totalAmount += good.totalAmount() + good.getSalesTax();
         }
         printPrice(output, totalSalesTax, "Sales Tax");
         printPrice(output, totalAmount, "Total Amount");
