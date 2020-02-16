@@ -3,25 +3,25 @@ package cc.xpbootcamp.warmup.cashier;
 import java.util.List;
 
 public class Order {
-    String cName;
-    String addr;
-    List<LineItem> lineItemList;
+    String customerName;
+    String address;
+    List<Good> goods;
 
-    public Order(String cName, String addr, List<LineItem> lineItemList) {
-        this.cName = cName;
-        this.addr = addr;
-        this.lineItemList = lineItemList;
+    public Order(String customerName, String address, List<Good> goods) {
+        this.customerName = customerName;
+        this.address = address;
+        this.goods = goods;
     }
 
     public String getCustomerName() {
-        return cName;
+        return customerName;
     }
 
     public String getCustomerAddress() {
-        return addr;
+        return address;
     }
 
-    public List<LineItem> getLineItems() {
-        return lineItemList;
+    public List<Good> getGoods() {
+        return goods;
     }
 }
