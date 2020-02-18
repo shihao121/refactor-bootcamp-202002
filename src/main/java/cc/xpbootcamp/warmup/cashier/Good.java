@@ -33,9 +33,9 @@ public class Good {
     }
 
 	String generateReceiptContent() {
-		return getDescription() + ReceiptConstant.TAB_ESCAPE_SEQUENCES
-				+ getPrice() + ReceiptConstant.TAB_ESCAPE_SEQUENCES
-				+ getQuantity() + ReceiptConstant.TAB_ESCAPE_SEQUENCES
+		return getDescription() + ReceiptConstant.SEPARATOR_CHARACTER
+				+ getPrice() + ReceiptConstant.MULTIPLY_CHARACTER
+				+ getQuantity() + ReceiptConstant.SEPARATOR_CHARACTER
 				+ totalAmount() + ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
 	}
 }

@@ -18,6 +18,7 @@ public class OrderReceipt {
         for (Good good : order.getGoods()) {
             output.append(good.generateReceiptContent());
         }
+        output.append(ReceiptConstant.SEPARATING_LINE);
         output.append(getSalesTax());
         output.append(getTotalAmount());
         return output.toString();
@@ -25,12 +26,12 @@ public class OrderReceipt {
 
     private String getTotalAmount() {
         return ReceiptConstant.TOTAL_AMOUNT_TOPIC +
-                ReceiptConstant.TAB_ESCAPE_SEQUENCES + order.getTotalAmount();
+                ReceiptConstant.COLON_CHARACTER + order.getTotalAmount();
     }
 
     private String getSalesTax() {
         return ReceiptConstant.SALES_TAX_TOPIC +
-                ReceiptConstant.TAB_ESCAPE_SEQUENCES + order.getTotalSalesTax();
+                ReceiptConstant.COLON_CHARACTER + order.getTotalSalesTax();
     }
 
     private String getCustomerInfo() {
