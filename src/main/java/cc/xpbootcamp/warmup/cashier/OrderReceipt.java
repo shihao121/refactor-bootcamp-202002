@@ -8,65 +8,54 @@ public class OrderReceipt {
     }
 
     public String printReceipt() {
+        return receiptHeader() +
+                getCustomerInfo() +
+                getGoodsDetails();
+    }
+
+    private String getGoodsDetails() {
         StringBuilder output = new StringBuilder();
 
-        printHeader(output);
-        printCustomerInfo(output);
-        printGoodsDetails(output);
+        for (Good good : order.getGoods()) {
+            output.append(getGoodDetails(good));
+        }
+        double totalAmount = getTotalAmount();
+
+        output.append("Sales Tax").append('\t').append(getTotalSalesTax());
+        output.append("Total Amount").append('\t').append(totalAmount);
         return output.toString();
     }
 
-    private void printGoodsDetails(StringBuilder output) {
-        double totalSalesTax = 0d;
+    private double getTotalAmount() {
         double totalAmount = 0d;
         for (Good good : order.getGoods()) {
-            printGoodDetails(output, good);
-            totalSalesTax += good.getSalesTax();
             totalAmount += good.totalAmount() + good.getSalesTax();
         }
-        printPrice(output, totalSalesTax, "Sales Tax");
-        printPrice(output, totalAmount, "Total Amount");
+        return totalAmount;
     }
 
-    private void printGoodDetails(StringBuilder output, Good good) {
-        printContent(output, good.getDescription());
-        printFourTimesSpacebar(output);
-        printContent(output, good.getPrice());
-        printFourTimesSpacebar(output);
-        printContent(output, good.getQuantity());
-        printFourTimesSpacebar(output);
-        printContent(output, good.totalAmount());
-        printInNewLine(output);
+    private double getTotalSalesTax() {
+        double totalSalesTax = 0d;
+        for (Good good : order.getGoods()) {
+            totalSalesTax += good.getSalesTax();
+        }
+        return totalSalesTax;
     }
 
-    private void printInNewLine(StringBuilder output) {
-        printSpecifyContent(output, '\n');
+    private String getGoodDetails(Good good) {
+        return good.getDescription() + "\t"
+                + good.getPrice() + "\t"
+                + good.getQuantity() + "\t"
+                + good.totalAmount() + "\n";
     }
 
-    private void printFourTimesSpacebar(StringBuilder output) {
-        printSpecifyContent(output, '\t');
+    private String getCustomerInfo() {
+        return order.getCustomerName() +
+                order.getCustomerAddress();
     }
 
-    private void printSpecifyContent(StringBuilder output, char escapeSequence) {
-        output.append(escapeSequence);
+    private String receiptHeader() {
+        return "======Printing Orders======\n";
     }
 
-    private void printPrice(StringBuilder output, double price, String priceDescription) {
-        printContent(output, priceDescription);
-        printFourTimesSpacebar(output);
-        printContent(output, price);
-    }
-
-    private void printCustomerInfo(StringBuilder output) {
-        printContent(output, order.getCustomerName());
-        printContent(output, order.getCustomerAddress());
-    }
-
-    private void printHeader(StringBuilder output) {
-        printContent(output, "======Printing Orders======\n");
-    }
-
-    private void printContent(StringBuilder output, Object content) {
-        output.append(content);
-    }
 }
