@@ -4,7 +4,6 @@ public class Good {
 	private String desc;
 	private double price;
 	private int quantity;
-	private double salesTax;
 
 	public Good(String desc, double price, int quantity) {
 		super();
@@ -32,4 +31,11 @@ public class Good {
     double totalAmount() {
         return price * quantity;
     }
+
+	String generateReceiptContent() {
+		return getDescription() + ReceiptConstant.TAB_ESCAPE_SEQUENCES
+				+ getPrice() + ReceiptConstant.TAB_ESCAPE_SEQUENCES
+				+ getQuantity() + ReceiptConstant.TAB_ESCAPE_SEQUENCES
+				+ totalAmount() + ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
+	}
 }

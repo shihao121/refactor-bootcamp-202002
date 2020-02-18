@@ -8,7 +8,7 @@ public class OrderReceipt {
     }
 
     public String printReceipt() {
-        return receiptHeader() +
+        return ReceiptConstant.RECEIPT_HEADER +
                 getCustomerInfo() +
                 getGoodsDetails();
     }
@@ -16,27 +16,25 @@ public class OrderReceipt {
     private String getGoodsDetails() {
         StringBuilder output = new StringBuilder();
         for (Good good : order.getGoods()) {
-            output.append(getGoodDetails(good));
+            output.append(good.generateReceiptContent());
         }
-        output.append("Sales Tax").append('\t').append(order.getTotalSalesTax());
-        output.append("Total Amount").append('\t').append(order.getTotalAmount());
+        output.append(getSalesTax());
+        output.append(getTotalAmount());
         return output.toString();
     }
 
-    private String getGoodDetails(Good good) {
-        return good.getDescription() + "\t"
-                + good.getPrice() + "\t"
-                + good.getQuantity() + "\t"
-                + good.totalAmount() + "\n";
+    private String getTotalAmount() {
+        return ReceiptConstant.TOTAL_AMOUNT_TOPIC +
+                ReceiptConstant.TAB_ESCAPE_SEQUENCES + order.getTotalAmount();
+    }
+
+    private String getSalesTax() {
+        return ReceiptConstant.SALES_TAX_TOPIC +
+                ReceiptConstant.TAB_ESCAPE_SEQUENCES + order.getTotalSalesTax();
     }
 
     private String getCustomerInfo() {
         return order.getCustomerName() +
                 order.getCustomerAddress();
     }
-
-    private String receiptHeader() {
-        return "======Printing Orders======\n";
-    }
-
 }
