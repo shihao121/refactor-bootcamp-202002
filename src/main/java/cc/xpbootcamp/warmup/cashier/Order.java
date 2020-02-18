@@ -13,6 +13,14 @@ public class Order {
         this.goods = goods;
     }
 
+    double getTotalSalesTax() {
+        return goods.stream().mapToDouble(Good::getSalesTax).sum();
+    }
+
+    double getTotalAmount() {
+        return goods.stream().mapToDouble(good -> good.getSalesTax() + good.totalAmount()).sum();
+    }
+
     public String getCustomerName() {
         return customerName;
     }

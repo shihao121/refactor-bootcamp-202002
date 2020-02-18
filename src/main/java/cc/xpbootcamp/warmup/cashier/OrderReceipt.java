@@ -15,31 +15,12 @@ public class OrderReceipt {
 
     private String getGoodsDetails() {
         StringBuilder output = new StringBuilder();
-
         for (Good good : order.getGoods()) {
             output.append(getGoodDetails(good));
         }
-        double totalAmount = getTotalAmount();
-
-        output.append("Sales Tax").append('\t').append(getTotalSalesTax());
-        output.append("Total Amount").append('\t').append(totalAmount);
+        output.append("Sales Tax").append('\t').append(order.getTotalSalesTax());
+        output.append("Total Amount").append('\t').append(order.getTotalAmount());
         return output.toString();
-    }
-
-    private double getTotalAmount() {
-        double totalAmount = 0d;
-        for (Good good : order.getGoods()) {
-            totalAmount += good.totalAmount() + good.getSalesTax();
-        }
-        return totalAmount;
-    }
-
-    private double getTotalSalesTax() {
-        double totalSalesTax = 0d;
-        for (Good good : order.getGoods()) {
-            totalSalesTax += good.getSalesTax();
-        }
-        return totalSalesTax;
     }
 
     private String getGoodDetails(Good good) {
