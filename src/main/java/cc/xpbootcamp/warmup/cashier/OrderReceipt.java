@@ -9,8 +9,16 @@ public class OrderReceipt {
 
     public String printReceipt() {
         return ReceiptConstant.RECEIPT_HEADER +
-                getCustomerInfo() +
+                getDateInfo() +
                 getGoodsDetails();
+    }
+
+    private String getDateInfo() {
+        return order.getDate() +
+                ReceiptConstant.SEPARATOR_CHARACTER +
+                order.getWeek() +
+                ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES +
+                ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
     }
 
     private String getGoodsDetails() {
