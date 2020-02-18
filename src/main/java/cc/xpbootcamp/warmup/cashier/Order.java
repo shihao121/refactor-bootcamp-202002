@@ -51,4 +51,11 @@ public class Order {
     public String getWeek() {
         return ReceiptConstant.CHINESE_WEEK[date.getDayOfWeek().ordinal() + 1];
     }
+
+    public double getAccountPrice() {
+        if (date.getDayOfWeek() == DayOfWeek.WEDNESDAY){
+            return getTotalAmount() * 0.02;
+        }
+        return 0;
+    }
 }
