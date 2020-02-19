@@ -49,7 +49,7 @@ public class Order {
     }
 
     public String getWeek() {
-        return ReceiptConstant.CHINESE_WEEK[date.getDayOfWeek().ordinal() + 1];
+        return ReceiptConstant.CHINESE_WEEK[date.getDayOfWeek().ordinal()];
     }
 
     public double getAccountPrice() {
