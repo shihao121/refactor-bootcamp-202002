@@ -32,10 +32,4 @@ public class Good {
         return price * quantity;
     }
 
-	String generateReceiptContent() {
-		return getDescription() + ReceiptConstant.SEPARATOR_CHARACTER
-				+ getPrice() + ReceiptConstant.MULTIPLY_CHARACTER
-				+ getQuantity() + ReceiptConstant.SEPARATOR_CHARACTER
-				+ totalAmount() + ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
-	}
 }

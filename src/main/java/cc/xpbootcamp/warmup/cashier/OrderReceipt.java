@@ -26,11 +26,18 @@ public class OrderReceipt {
     private String getGoodsDetails() {
         StringBuilder output = new StringBuilder();
         for (Good good : order.getGoods()) {
-            output.append(good.generateReceiptContent());
+            output.append(generateReceiptContent(good));
         }
         output.append(ReceiptConstant.SEPARATING_LINE);
         output.append(getOrderSummary());
         return output.toString();
+    }
+
+    static String generateReceiptContent(Good good) {
+        return good.getDescription() + ReceiptConstant.SEPARATOR_CHARACTER
+                + good.getPrice() + ReceiptConstant.MULTIPLY_CHARACTER
+                + good.getQuantity() + ReceiptConstant.SEPARATOR_CHARACTER
+                + good.totalAmount() + ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
     }
 
     private String getOrderSummary() {
