@@ -24,7 +24,7 @@ class OrderReceiptTest {
                 Arguments.of(LocalDate.of(2020, 2, 20), "星期四"),
                 Arguments.of(LocalDate.of(2020, 2, 21), "星期五"),
                 Arguments.of(LocalDate.of(2020, 2, 22), "星期六"),
-                Arguments.of(LocalDate.of(2020, 2, 23), "星期天")
+                Arguments.of(LocalDate.of(2020, 2, 23), "星期日")
         );
     }
 
@@ -61,7 +61,7 @@ class OrderReceiptTest {
 
         String output = receipt.printReceipt();
 
-        assertThat(output, containsString("2020年02月18日"));
+        assertThat(output, containsString("2020年2月18日"));
         assertThat(output, containsString("星期二\n"));
         assertFalse(output.contains("折扣"));
     }
@@ -79,7 +79,7 @@ class OrderReceiptTest {
 
         String output = receipt.printReceipt();
 
-        assertThat(output, containsString("2020年02月19日"));
+        assertThat(output, containsString("2020年2月19日"));
         assertThat(output, containsString("星期三\n"));
         assertThat(output, containsString("折扣: 1.43\n"));
         assertThat(output, containsString("总价: 70.07\n"));

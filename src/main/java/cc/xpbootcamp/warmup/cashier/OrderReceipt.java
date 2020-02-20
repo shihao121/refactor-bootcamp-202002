@@ -1,6 +1,6 @@
 package cc.xpbootcamp.warmup.cashier;
 
-import java.time.DayOfWeek;
+import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
 
 public class OrderReceipt {
     private Order order;
@@ -16,9 +16,9 @@ public class OrderReceipt {
     }
 
     private String getDateInfo() {
-        return order.getDate() +
+        return order.getDate().format(ReceiptConstant.DATE_FORMATTER) +
                 ReceiptConstant.SEPARATOR_CHARACTER +
-                order.getWeek() +
+                DateUtil.ofWeek(order.getDate()) +
                 ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES +
                 ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
     }

@@ -1,8 +1,9 @@
 package cc.xpbootcamp.warmup.cashier;
 
+import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Order {
@@ -44,12 +45,8 @@ public class Order {
         return goods;
     }
 
-    public String getDate() {
-        return date.format(DateTimeFormatter.ofPattern("yyyy年MM月dd日"));
-    }
-
-    public String getWeek() {
-        return ReceiptConstant.CHINESE_WEEK[date.getDayOfWeek().ordinal()];
+    public LocalDate getDate() {
+        return this.date;
     }
 
     public double getAccountPrice() {
