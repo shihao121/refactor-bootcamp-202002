@@ -29,7 +29,7 @@ public class Order {
     }
 
     double getTotalAmount() {
-        return goods.stream().mapToDouble(good -> good.getSalesTax() + good.totalAmount()).sum();
+        return goods.stream().mapToDouble(good -> good.getSalesTax() + good.totalAmount()).sum() - getAccountPrice();
     }
 
     public String getCustomerName() {
@@ -54,7 +54,7 @@ public class Order {
 
     public double getAccountPrice() {
         if (date.getDayOfWeek() == DayOfWeek.WEDNESDAY){
-            return getTotalAmount() * 0.02;
+            return goods.stream().mapToDouble(good -> good.getSalesTax() + good.totalAmount()).sum() * 0.02;
         }
         return 0;
     }

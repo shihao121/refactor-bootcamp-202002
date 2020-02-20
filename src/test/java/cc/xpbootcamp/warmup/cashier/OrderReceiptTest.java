@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -83,6 +82,7 @@ class OrderReceiptTest {
         assertThat(output, containsString("2020年02月19日"));
         assertThat(output, containsString("星期三\n"));
         assertThat(output, containsString("折扣: 1.43\n"));
+        assertThat(output, containsString("总价: 70.07\n"));
     }
 
     @ParameterizedTest
