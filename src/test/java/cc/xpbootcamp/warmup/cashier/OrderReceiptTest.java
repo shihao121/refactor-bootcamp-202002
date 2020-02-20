@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class OrderReceiptTest {
@@ -78,11 +79,19 @@ class OrderReceiptTest {
         OrderReceipt receipt = new OrderReceipt(order);
 
         String output = receipt.printReceipt();
-
-        assertThat(output, containsString("2020年2月19日"));
-        assertThat(output, containsString("星期三\n"));
-        assertThat(output, containsString("折扣: 1.43\n"));
-        assertThat(output, containsString("总价: 70.07\n"));
+        System.out.println(output);
+        assertEquals(
+                "===== 老王超市，值得信赖 ======\n" +
+                "\n" +
+                "2020年2月19日, 星期三\n" +
+                "\n" +
+                "milk, 10.0 × 2, 20.0\n" +
+                "biscuits, 5.0 × 5, 25.0\n" +
+                "chocolate, 20.0 × 1, 20.0\n" +
+                "-----------------------------------\n" +
+                "税额: 6.5\n" +
+                "折扣: 1.43\n" +
+                "总价: 70.07\n", output);
     }
 
     @ParameterizedTest
