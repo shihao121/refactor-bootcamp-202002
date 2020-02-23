@@ -1,7 +1,5 @@
 package cc.xpbootcamp.warmup.cashier;
 
-import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -9,28 +7,22 @@ import java.util.List;
 public class Order {
     String customerName;
     String address;
-    List<Good> goods;
+    List<OrderItem> orderItems;
     LocalDate date;
 
-    public Order(String customerName, String address, List<Good> goods) {
+    public Order(String customerName, String address, List<OrderItem> orderItems, LocalDate date) {
         this.customerName = customerName;
         this.address = address;
-        this.goods = goods;
-    }
-
-    public Order(String customerName, String address, List<Good> goods, LocalDate date) {
-        this.customerName = customerName;
-        this.address = address;
-        this.goods = goods;
+        this.orderItems = orderItems;
         this.date = date;
     }
 
-    double getTotalSalesTax() {
-        return goods.stream().mapToDouble(Good::getSalesTax).sum();
+    double calculateTotalSalesTax() {
+        return orderItems.stream().mapToDouble(OrderItem::getSalesTax).sum();
     }
 
-    double getTotalAmount() {
-        return goods.stream().mapToDouble(good -> good.getSalesTax() + good.totalAmount()).sum() - getAccountPrice();
+    double calculateTotalAmount() {
+        return calculateTotalAmountWithoutAcount() - calculateAccountPrice();
     }
 
     public String getCustomerName() {
@@ -41,18 +33,22 @@ public class Order {
         return address;
     }
 
-    public List<Good> getGoods() {
-        return goods;
+    public List<OrderItem> getOrderItems() {
+        return orderItems;
     }
 
     public LocalDate getDate() {
         return this.date;
     }
 
-    public double getAccountPrice() {
+    public double calculateAccountPrice() {
         if (date.getDayOfWeek() == DayOfWeek.WEDNESDAY){
-            return goods.stream().mapToDouble(good -> good.getSalesTax() + good.totalAmount()).sum() * 0.02;
+            return calculateTotalAmountWithoutAcount() * 0.02;
         }
         return 0;
+    }
+
+    private double calculateTotalAmountWithoutAcount() {
+        return orderItems.stream().mapToDouble(orderItem -> orderItem.getSalesTax() + orderItem.totalAmount()).sum();
     }
 }

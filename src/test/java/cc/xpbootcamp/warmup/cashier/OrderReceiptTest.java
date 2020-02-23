@@ -31,12 +31,12 @@ class OrderReceiptTest {
 
     @Test
     public void shouldPrintLineItemAndSalesTaxInformation() {
-        List<Good> goods = new ArrayList<Good>() {{
-            add(new Good("milk", 10.0, 2));
-            add(new Good("biscuits", 5.0, 5));
-            add(new Good("chocolate", 20.0, 1));
+        List<OrderItem> orderItems = new ArrayList<OrderItem>() {{
+            add(new OrderItem("milk", 10.0, 2));
+            add(new OrderItem("biscuits", 5.0, 5));
+            add(new OrderItem("chocolate", 20.0, 1));
         }};
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, goods, LocalDate.of(2020, 2, 18)));
+        OrderReceipt receipt = new OrderReceipt(new Order(null, null, orderItems, LocalDate.of(2020, 2, 18)));
 
         String output = receipt.printReceipt();
 
@@ -51,12 +51,12 @@ class OrderReceiptTest {
 
     @Test
     void should_display_date_and_week_info() {
-        List<Good> goods = new ArrayList<Good>() {{
-            add(new Good("milk", 10.0, 2));
-            add(new Good("biscuits", 5.0, 5));
-            add(new Good("chocolate", 20.0, 1));
+        List<OrderItem> orderItems = new ArrayList<OrderItem>() {{
+            add(new OrderItem("milk", 10.0, 2));
+            add(new OrderItem("biscuits", 5.0, 5));
+            add(new OrderItem("chocolate", 20.0, 1));
         }};
-        Order order = new Order("Mr X", "Chicago, 60601", goods,
+        Order order = new Order("Mr X", "Chicago, 60601", orderItems,
                 LocalDate.of(2020, 2, 18));
         OrderReceipt receipt = new OrderReceipt(order);
 
@@ -69,12 +69,12 @@ class OrderReceiptTest {
 
     @Test
     void should_display_discount_price() {
-        List<Good> goods = new ArrayList<Good>() {{
-            add(new Good("milk", 10.0, 2));
-            add(new Good("biscuits", 5.0, 5));
-            add(new Good("chocolate", 20.0, 1));
+        List<OrderItem> orderItems = new ArrayList<OrderItem>() {{
+            add(new OrderItem("milk", 10.0, 2));
+            add(new OrderItem("biscuits", 5.0, 5));
+            add(new OrderItem("chocolate", 20.0, 1));
         }};
-        Order order = new Order("Mr X", "Chicago, 60601", goods,
+        Order order = new Order("Mr X", "Chicago, 60601", orderItems,
                 LocalDate.of(2020, 2, 19));
         OrderReceipt receipt = new OrderReceipt(order);
 

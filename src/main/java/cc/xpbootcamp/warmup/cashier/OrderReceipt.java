@@ -25,19 +25,19 @@ public class OrderReceipt {
 
     private String getGoodsDetails() {
         StringBuilder output = new StringBuilder();
-        for (Good good : order.getGoods()) {
-            output.append(generateReceiptContent(good));
+        for (OrderItem orderItem : order.getOrderItems()) {
+            output.append(generateReceiptContent(orderItem));
         }
         output.append(ReceiptConstant.SEPARATING_LINE);
         output.append(getOrderSummary());
         return output.toString();
     }
 
-    static String generateReceiptContent(Good good) {
-        return good.getDescription() + ReceiptConstant.SEPARATOR_CHARACTER
-                + good.getPrice() + ReceiptConstant.MULTIPLY_CHARACTER
-                + good.getQuantity() + ReceiptConstant.SEPARATOR_CHARACTER
-                + good.totalAmount() + ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
+    static String generateReceiptContent(OrderItem orderItem) {
+        return orderItem.getDescription() + ReceiptConstant.SEPARATOR_CHARACTER
+                + orderItem.getPrice() + ReceiptConstant.MULTIPLY_CHARACTER
+                + orderItem.getQuantity() + ReceiptConstant.SEPARATOR_CHARACTER
+                + orderItem.totalAmount() + ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
     }
 
     private String getOrderSummary() {
@@ -47,9 +47,9 @@ public class OrderReceipt {
     }
 
     private String getDiscountPrice() {
-        if (order.getAccountPrice() > 0){
+        if (order.calculateAccountPrice() > 0){
             return ReceiptConstant.DISCOUNT_TOPIC +
-                    ReceiptConstant.COLON_CHARACTER + order.getAccountPrice() +
+                    ReceiptConstant.COLON_CHARACTER + order.calculateAccountPrice() +
                     ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
         }
         return "";
@@ -57,13 +57,13 @@ public class OrderReceipt {
 
     private String getTotalAmount() {
         return ReceiptConstant.TOTAL_AMOUNT_TOPIC +
-                ReceiptConstant.COLON_CHARACTER + order.getTotalAmount() +
+                ReceiptConstant.COLON_CHARACTER + order.calculateTotalAmount() +
                 ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
     }
 
     private String getSalesTax() {
         return ReceiptConstant.SALES_TAX_TOPIC +
-                ReceiptConstant.COLON_CHARACTER + order.getTotalSalesTax() +
+                ReceiptConstant.COLON_CHARACTER + order.calculateTotalSalesTax() +
                 ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
     }
 
