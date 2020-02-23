@@ -5,32 +5,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Order {
-    String customerName;
-    String address;
+    public static final double DISCOUNT_PERCENTAGE = 0.02;
     List<OrderItem> orderItems;
     LocalDate date;
 
-    public Order(String customerName, String address, List<OrderItem> orderItems, LocalDate date) {
-        this.customerName = customerName;
-        this.address = address;
+    public Order(List<OrderItem> orderItems, LocalDate date) {
         this.orderItems = orderItems;
         this.date = date;
-    }
-
-    double calculateTotalSalesTax() {
-        return orderItems.stream().mapToDouble(OrderItem::getSalesTax).sum();
-    }
-
-    double calculateTotalAmount() {
-        return calculateTotalAmountWithoutAcount() - calculateAccountPrice();
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public String getCustomerAddress() {
-        return address;
     }
 
     public List<OrderItem> getOrderItems() {
@@ -41,9 +22,17 @@ public class Order {
         return this.date;
     }
 
+    double calculateTotalSalesTax() {
+        return orderItems.stream().mapToDouble(OrderItem::getSalesTax).sum();
+    }
+
+    double calculateTotalAmount() {
+        return calculateTotalAmountWithoutAcount() - calculateAccountPrice();
+    }
+
     public double calculateAccountPrice() {
         if (date.getDayOfWeek() == DayOfWeek.WEDNESDAY){
-            return calculateTotalAmountWithoutAcount() * 0.02;
+            return calculateTotalAmountWithoutAcount() * DISCOUNT_PERCENTAGE;
         }
         return 0;
     }

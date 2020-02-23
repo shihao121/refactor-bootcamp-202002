@@ -67,9 +67,4 @@ public class OrderReceipt {
                 ReceiptConstant.COLON_CHARACTER + order.calculateTotalSalesTax() +
                 ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
     }
-
-    private String getCustomerInfo() {
-        return order.getCustomerName() +
-                order.getCustomerAddress();
-    }
 }

@@ -36,7 +36,7 @@ class OrderReceiptTest {
             add(new OrderItem("biscuits", 5.0, 5));
             add(new OrderItem("chocolate", 20.0, 1));
         }};
-        OrderReceipt receipt = new OrderReceipt(new Order(null, null, orderItems, LocalDate.of(2020, 2, 18)));
+        OrderReceipt receipt = new OrderReceipt(new Order(orderItems, LocalDate.of(2020, 2, 18)));
 
         String output = receipt.printReceipt();
 
@@ -56,7 +56,7 @@ class OrderReceiptTest {
             add(new OrderItem("biscuits", 5.0, 5));
             add(new OrderItem("chocolate", 20.0, 1));
         }};
-        Order order = new Order("Mr X", "Chicago, 60601", orderItems,
+        Order order = new Order(orderItems,
                 LocalDate.of(2020, 2, 18));
         OrderReceipt receipt = new OrderReceipt(order);
 
@@ -74,12 +74,11 @@ class OrderReceiptTest {
             add(new OrderItem("biscuits", 5.0, 5));
             add(new OrderItem("chocolate", 20.0, 1));
         }};
-        Order order = new Order("Mr X", "Chicago, 60601", orderItems,
+        Order order = new Order(orderItems,
                 LocalDate.of(2020, 2, 19));
         OrderReceipt receipt = new OrderReceipt(order);
 
         String output = receipt.printReceipt();
-        System.out.println(output);
         assertEquals(
                 "===== 老王超市，值得信赖 ======\n" +
                 "\n" +
@@ -97,7 +96,7 @@ class OrderReceiptTest {
     @ParameterizedTest
     @MethodSource("weekForDate")
     void should_display_week_info(LocalDate date, String week) {
-        Order order = new Order("Mr X", "Chicago, 60601", new ArrayList<>(),
+        Order order = new Order(new ArrayList<>(),
                 date);
         OrderReceipt receipt = new OrderReceipt(order);
         String output = receipt.printReceipt();
