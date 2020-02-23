@@ -1,6 +1,7 @@
 package cc.xpbootcamp.warmup.cashier;
 
-import cc.xpbootcamp.warmup.cashier.utils.DateUtil;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class OrderReceipt {
     private Order order;
@@ -18,7 +19,7 @@ public class OrderReceipt {
     private String getDateInfo() {
         return order.getDate().format(ReceiptConstant.DATE_FORMATTER) +
                 ReceiptConstant.SEPARATOR_CHARACTER +
-                DateUtil.ofWeek(order.getDate()) +
+                order.getDate().format(DateTimeFormatter.ofPattern("E", Locale.CHINESE)) +
                 ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES +
                 ReceiptConstant.NEW_LINE_ESCAPE_SEQUENCES;
     }

@@ -1,8 +1,6 @@
 package cc.xpbootcamp.warmup.cashier;
 
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ReceiptConstant {
     public static final String RECEIPT_HEADER = "===== 老王超市，值得信赖 ======\n\n";
